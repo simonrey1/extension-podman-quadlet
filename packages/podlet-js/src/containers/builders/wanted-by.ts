@@ -20,7 +20,7 @@ import type { ContainerQuadlet } from '../../models/container-quadlet';
 
 export class WantedBy extends ContainerQuadletBuilder {
   override build(from: ContainerQuadlet): ContainerQuadlet {
-    if(this.options?.wantedBy) {
+    if (this.options?.wantedBy) {
       from.Install = {
         ...from.Install,
         WantedBy: this.options?.wantedBy,

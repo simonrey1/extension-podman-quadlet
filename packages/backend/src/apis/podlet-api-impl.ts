@@ -19,7 +19,7 @@ export class PodletApiImpl extends PodletApi {
   override async generate<T extends QuadletTypeGenerate>(options: {
     connection: ProviderContainerConnectionIdentifierInfo;
     type: T;
-    options: QuadletGenerateOptions & { type: T },
+    options: QuadletGenerateOptions & { type: T };
     resourceId: string;
   }): Promise<string> {
     return this.dependencies.podletJS.generate(options);

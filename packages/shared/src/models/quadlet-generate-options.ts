@@ -18,12 +18,12 @@
 import type { QuadletType } from '../utils/quadlet-type';
 
 export interface ContainerGenerateOptions {
-  type: QuadletType.CONTAINER,
-  wantedBy?: string
+  type: QuadletType.CONTAINER;
+  wantedBy?: string;
 }
 
 export interface ImageGenerateOptions {
-  type: QuadletType.IMAGE,
+  type: QuadletType.IMAGE;
 }
 
 export type QuadletGenerateOptions = ContainerGenerateOptions | ImageGenerateOptions;

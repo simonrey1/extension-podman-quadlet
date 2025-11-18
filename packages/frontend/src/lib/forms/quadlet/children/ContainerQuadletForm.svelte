@@ -22,7 +22,7 @@ let containers: SimpleContainerInfo[] | undefined = $state();
 const QUERY_WANTED_BY = 'container:wanted-by';
 function getContainerGenerateOptions(): ContainerGenerateOptions {
   let wantedBy: string | undefined = undefined;
-  if(router.location.query.get(QUERY_WANTED_BY)) {
+  if (router.location.query.get(QUERY_WANTED_BY)) {
     wantedBy = String(router.location.query.get(QUERY_WANTED_BY));
   }
 
@@ -83,7 +83,7 @@ $effect(() => {
 
 function onStartOnBootChange(checked: boolean): void {
   options.wantedBy = checked ? 'default.target' : undefined;
-  if(options.wantedBy) {
+  if (options.wantedBy) {
     router.location.query.set(QUERY_WANTED_BY, options.wantedBy);
   } else {
     router.location.query.delete(QUERY_WANTED_BY);
@@ -102,12 +102,11 @@ function onStartOnBootChange(checked: boolean): void {
 
 <div class="pt-4">
   <div class="text-base font-bold text-(--pd-content-card-header-text)">Options</div>
-  <Checkbox 
+  <Checkbox
     class="mx-1 my-auto"
-    title="Start on boot" 
+    title="Start on boot"
     checked={options.wantedBy === 'default.target'}
-    onclick={onStartOnBootChange}
-  >
+    onclick={onStartOnBootChange}>
     <div>Start on boot</div>
   </Checkbox>
 </div>

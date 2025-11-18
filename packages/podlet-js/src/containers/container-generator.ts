@@ -38,7 +38,7 @@ export interface ContainerGeneratorOptions {
    * This option may be used to make the container start on boot
    * @example `default.target`
    */
-  wantedBy?: string
+  wantedBy?: string;
 }
 
 export interface ContainerGeneratorDependencies {

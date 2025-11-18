@@ -412,5 +412,5 @@ export interface ContainerQuadlet {
      */
     Volume?: Array<string>;
   };
-  Install?: InstallQuadlet
+  Install?: InstallQuadlet;
 }

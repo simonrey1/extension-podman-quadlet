@@ -19,7 +19,6 @@ import type { ContainerQuadlet } from '../../models/container-quadlet';
 import type { ContainerInspectInfo, ImageInspectInfo } from '@podman-desktop/api';
 import type { ContainerGeneratorDependencies, ContainerGeneratorOptions } from '../container-generator';
 
-
 export abstract class ContainerQuadletBuilder {
   constructor(private dependencies: ContainerGeneratorDependencies) {}
 

@@ -32,7 +32,6 @@ interface Dependencies {
   telemetry: TelemetryLogger;
 }
 
-
 export class PodletJsService {
   constructor(protected dependencies: Dependencies) {}
 
@@ -43,7 +42,11 @@ export class PodletJsService {
    * @param options
    * @protected
    */
-  protected async generateContainer(engineId: string, containerId: string, options: ContainerGeneratorOptions): Promise<string> {
+  protected async generateContainer(
+    engineId: string,
+    containerId: string,
+    options: ContainerGeneratorOptions,
+  ): Promise<string> {
     const container: ContainerInspectInfo = await this.dependencies.containers.inspectContainer(engineId, containerId);
 
     const image: ImageInspectInfo = await this.dependencies.images.inspectImage(engineId, container.Image);
@@ -72,7 +75,7 @@ export class PodletJsService {
   public async generate<T extends QuadletTypeGenerate>(options: {
     connection: ProviderContainerConnectionIdentifierInfo;
     type: T;
-    options: QuadletGenerateOptions & { type: T },
+    options: QuadletGenerateOptions & { type: T };
     resourceId: string;
   }): Promise<string> {
     const records: Record<string, unknown> = {

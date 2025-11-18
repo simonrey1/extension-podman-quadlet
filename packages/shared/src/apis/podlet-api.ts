@@ -11,7 +11,7 @@ export abstract class PodletApi {
   abstract generate<T extends QuadletTypeGenerate>(options: {
     type: T;
     connection: ProviderContainerConnectionIdentifierInfo;
-    options?: QuadletGenerateOptions & { type: T },
+    options?: QuadletGenerateOptions & { type: T };
     resourceId: string;
   }): Promise<string>;
 
