@@ -17,20 +17,20 @@
  ***********************************************************************/
 import type { ContainerQuadlet } from '../../models/container-quadlet';
 import type { ContainerInspectInfo, ImageInspectInfo } from '@podman-desktop/api';
+import type { ContainerGeneratorDependencies, ContainerGeneratorOptions } from '../container-generator';
 
-export interface Dependencies {
-  container: ContainerInspectInfo;
-  image: ImageInspectInfo;
-}
 
 export abstract class ContainerQuadletBuilder {
-  constructor(private dependencies: Dependencies) {}
+  constructor(private dependencies: ContainerGeneratorDependencies) {}
 
   protected get image(): ImageInspectInfo {
     return this.dependencies.image;
   }
   protected get container(): ContainerInspectInfo {
     return this.dependencies.container;
+  }
+  protected get options(): ContainerGeneratorOptions {
+    return this.dependencies.options ?? {};
   }
 
   /**
