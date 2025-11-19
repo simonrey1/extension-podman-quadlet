@@ -105,6 +105,7 @@ function onStartOnBootChange(checked: boolean): void {
   <Checkbox
     class="mx-1 my-auto"
     title="Start on boot"
+    disabled={loading || provider === undefined || disabled}
     checked={options.wantedBy === 'default.target'}
     onclick={onStartOnBootChange}>
     <div>Start on boot</div>
