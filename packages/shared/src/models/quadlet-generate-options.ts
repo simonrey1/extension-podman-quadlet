@@ -22,8 +22,8 @@ export interface ContainerGenerateOptions {
   wantedBy?: string;
 }
 
-export interface ImageGenerateOptions {
-  type: QuadletType.IMAGE;
-}
-
-export type QuadletGenerateOptions = ContainerGenerateOptions | ImageGenerateOptions;
+export type QuadletGenerateOptions =
+  | ContainerGenerateOptions
+  | {
+      type: QuadletType.IMAGE | QuadletType.POD | QuadletType.VOLUME | QuadletType.NETWORK;
+    };

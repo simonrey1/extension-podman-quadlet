@@ -97,7 +97,6 @@ describe('container quadlets', () => {
     // generate container quadlet
     const result = await podletJs.generate({
       connection: CONTAINER_CONNECTION_IDENTIFIER,
-      type: QuadletType.CONTAINER,
       resourceId: CONTAINER_INSPECT_MOCK.Id,
       options: {
         type: QuadletType.CONTAINER,
@@ -134,7 +133,6 @@ describe('container quadlets', () => {
     // generate container quadlet
     await podletJs.generate({
       connection: CONTAINER_CONNECTION_IDENTIFIER,
-      type: QuadletType.CONTAINER,
       resourceId: CONTAINER_INSPECT_MOCK.Id,
       options: {
         type: QuadletType.CONTAINER,
@@ -154,7 +152,6 @@ describe('container quadlets', () => {
     // generate container quadlet
     await podletJs.generate({
       connection: CONTAINER_CONNECTION_IDENTIFIER,
-      type: QuadletType.CONTAINER,
       resourceId: CONTAINER_INSPECT_MOCK.Id,
       options: {
         type: QuadletType.CONTAINER,
@@ -183,7 +180,6 @@ describe('container quadlets', () => {
     await expect(() => {
       return podletJs.generate({
         connection: CONTAINER_CONNECTION_IDENTIFIER,
-        type: QuadletType.CONTAINER,
         resourceId: CONTAINER_INSPECT_MOCK.Id,
         options: {
           type: QuadletType.CONTAINER,
@@ -207,7 +203,6 @@ describe('image quadlets', () => {
     // generate container quadlet
     const result = await podletJs.generate({
       connection: CONTAINER_CONNECTION_IDENTIFIER,
-      type: QuadletType.IMAGE,
       resourceId: IMAGE_INSPECT_MOCK.Id,
       options: {
         type: QuadletType.IMAGE,

@@ -16,7 +16,7 @@
  * SPDX-License-Identifier: Apache-2.0
  ***********************************************************************/
 import type { ProviderContainerConnectionIdentifierInfo } from '/@shared/src/models/provider-container-connection-identifier-info';
-import { QuadletType, type QuadletTypeGenerate } from '/@shared/src/utils/quadlet-type';
+import { QuadletType } from '/@shared/src/utils/quadlet-type';
 import type { ContainerService } from './container-service';
 import type { ImageService } from './image-service';
 import type { ContainerInspectInfo, ImageInspectInfo, TelemetryLogger } from '@podman-desktop/api';
@@ -72,14 +72,13 @@ export class PodletJsService {
     }).generate();
   }
 
-  public async generate<T extends QuadletTypeGenerate>(options: {
+  public async generate(options: {
     connection: ProviderContainerConnectionIdentifierInfo;
-    type: T;
-    options: QuadletGenerateOptions & { type: T };
+    options: QuadletGenerateOptions;
     resourceId: string;
   }): Promise<string> {
     const records: Record<string, unknown> = {
-      'quadlet-type': options.type.toLowerCase(),
+      'quadlet-type': options.options.type.toLowerCase(),
     };
 
     // Get the engine id
@@ -93,7 +92,7 @@ export class PodletJsService {
         case QuadletType.IMAGE:
           return await this.generateImage(engineId, options.resourceId);
         default:
-          throw new Error(`cannot generate quadlet type ${options.type}: unsupported`);
+          throw new Error(`cannot generate quadlet type ${options.options.type}: unsupported`);
       }
     } catch (err: unknown) {
       records['error'] = err;

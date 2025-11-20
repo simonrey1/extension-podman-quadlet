@@ -84,7 +84,7 @@ let validFilename: boolean = $derived.by(() => {
   return parts.length >= 2 && parts[0].length > 0 && parts[parts.length - 1] === quadletType.toLowerCase();
 });
 
-let options: QuadletGenerateOptions | undefined = $state(undefined);
+let options: QuadletGenerateOptions | undefined = $state({ type: quadletType as QuadletTypeGenerate });
 
 let step: string = $derived(loaded ? 'completed' : quadlet !== undefined ? 'edit' : 'options');
 
@@ -107,7 +107,6 @@ async function generate(): Promise<void> {
     .generate({
       connection: $state.snapshot(selectedContainerProviderConnection),
       resourceId: $state.snapshot(resourceId),
-      type: quadletType as QuadletTypeGenerate,
       options: $state.snapshot(options),
     })
     .then(onGenerated)
