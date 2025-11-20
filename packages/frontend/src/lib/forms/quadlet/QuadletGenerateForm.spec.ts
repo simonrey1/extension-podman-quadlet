@@ -114,7 +114,9 @@ describe('Step options', () => {
       expect(podletAPI.generate).toHaveBeenCalledWith({
         connection: WSL_PROVIDER_DETAILED_INFO,
         resourceId: 'dummy-resource-id',
-        type: QuadletType.CONTAINER,
+        options: {
+          type: QuadletType.CONTAINER,
+        },
       });
     });
   });

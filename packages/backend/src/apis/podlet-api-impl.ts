@@ -5,6 +5,7 @@ import { PodletApi } from '/@shared/src/apis/podlet-api';
 import type { ProviderContainerConnectionIdentifierInfo } from '/@shared/src/models/provider-container-connection-identifier-info';
 import type { QuadletType } from '/@shared/src/utils/quadlet-type';
 import type { PodletJsService } from '../services/podlet-js-service';
+import type { QuadletGenerateOptions } from '/@shared/src/models/quadlet-generate-options';
 
 interface Dependencies {
   podletJS: PodletJsService;
@@ -17,7 +18,7 @@ export class PodletApiImpl extends PodletApi {
 
   override async generate(options: {
     connection: ProviderContainerConnectionIdentifierInfo;
-    type: QuadletType;
+    options: QuadletGenerateOptions;
     resourceId: string;
   }): Promise<string> {
     return this.dependencies.podletJS.generate(options);

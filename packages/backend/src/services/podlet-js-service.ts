@@ -23,6 +23,8 @@ import type { ContainerInspectInfo, ImageInspectInfo, TelemetryLogger } from '@p
 import { ContainerGenerator, Compose, ImageGenerator } from 'podlet-js';
 import { readFile } from 'node:fs/promises';
 import { TelemetryEvents } from '../utils/telemetry-events';
+import type { QuadletGenerateOptions } from '/@shared/src/models/quadlet-generate-options';
+import type { ContainerGeneratorOptions } from 'podlet-js';
 
 interface Dependencies {
   containers: ContainerService;
@@ -37,9 +39,14 @@ export class PodletJsService {
    * Using the `podlet-js` package, generate a stringify {@link ContainerQuadlet}
    * @param engineId
    * @param containerId
+   * @param options
    * @protected
    */
-  protected async generateContainer(engineId: string, containerId: string): Promise<string> {
+  protected async generateContainer(
+    engineId: string,
+    containerId: string,
+    options: ContainerGeneratorOptions,
+  ): Promise<string> {
     const container: ContainerInspectInfo = await this.dependencies.containers.inspectContainer(engineId, containerId);
 
     const image: ImageInspectInfo = await this.dependencies.images.inspectImage(engineId, container.Image);
@@ -47,6 +54,7 @@ export class PodletJsService {
     return new ContainerGenerator({
       container,
       image,
+      options,
     }).generate();
   }
 
@@ -66,24 +74,25 @@ export class PodletJsService {
 
   public async generate(options: {
     connection: ProviderContainerConnectionIdentifierInfo;
-    type: QuadletType;
+    options: QuadletGenerateOptions;
     resourceId: string;
   }): Promise<string> {
     const records: Record<string, unknown> = {
-      'quadlet-type': options.type.toLowerCase(),
+      'quadlet-type': options.options.type.toLowerCase(),
     };
 
     // Get the engine id
     const engineId = await this.dependencies.containers.getEngineId(options.connection);
 
+    const { type, ...rest } = options.options;
     try {
-      switch (options.type) {
+      switch (type) {
         case QuadletType.CONTAINER:
-          return await this.generateContainer(engineId, options.resourceId);
+          return await this.generateContainer(engineId, options.resourceId, { ...rest });
         case QuadletType.IMAGE:
           return await this.generateImage(engineId, options.resourceId);
         default:
-          throw new Error(`cannot generate quadlet type ${options.type}: unsupported`);
+          throw new Error(`cannot generate quadlet type ${options.options.type}: unsupported`);
       }
     } catch (err: unknown) {
       records['error'] = err;
